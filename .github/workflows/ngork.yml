@@ -9,9 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     name: node-wechat
     steps:
-      - name: Ngork       
+      - name: Chmod       
         run: |
-          ./natapp -authtoken=0083ee88dbe7d7fa          
+          chmod a+x natapp
+          
+      - name: Natapp       
+        run: |
+          ./natapp -log=stdout -authtoken=0083ee88dbe7d7fa 
           
 
 
