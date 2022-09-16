@@ -26,6 +26,5 @@ jobs:
           
       - name: Natapp       
         run: |
-          natapp -h 
           ./natapp -h
       
