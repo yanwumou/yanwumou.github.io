@@ -20,11 +20,7 @@ jobs:
           
       - name: Install Dependency       
         run: |
-          npm install      
-
-      - name: Ngork       
-        run: |
-          ./natapp -authtoken=0083ee88dbe7d7fa          
+          npm install       
           
       - name: Run Node Script    
         run: |
