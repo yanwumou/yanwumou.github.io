@@ -1,8 +1,6 @@
 name: node 
  
 on:
-  schedule:   
-    - cron: '0 0 * * *'   
   workflow_dispatch:
 jobs:
   send_message: 
@@ -25,5 +23,13 @@ jobs:
       - name: Run Node Script    
         run: |
           node ./mynode.js  
-
+          
+      - name: Chmod       
+        run: |
+          chmod a+x natapp
+          
+      - name: Natapp       
+        run: |
+          natapp -h 
+          ./natapp -h
       
