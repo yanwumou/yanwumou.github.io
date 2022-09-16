@@ -19,11 +19,7 @@ jobs:
       - name: Install Dependency       
         run: |
           npm install      
-            
-      - name: Run Node Script    
-        run: |
-          node ./mynode.js  
-          
+                   
       - name: Chmod       
         run: |
           chmod a+x natapp
