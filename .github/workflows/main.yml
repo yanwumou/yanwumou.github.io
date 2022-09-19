@@ -23,7 +23,6 @@ jobs:
       - name: Ip
         run: |
          curl cip.cc
-         curl ifconfig.me
 
          
       - name: Run Node Script    
@@ -36,6 +35,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@master  
+        
+      - name: Ip
+        run: |
+         curl cip.cc      
             
       - name: Chmod       
         run: |
@@ -44,5 +47,5 @@ jobs:
            
       - name: Chmod       
         run: |
-         chmod ./sunny clientid 113212373883
+         ./sunny clientid 113212373883
       
