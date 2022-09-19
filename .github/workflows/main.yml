@@ -19,6 +19,12 @@ jobs:
       - name: Install Dependency       
         run: |
           npm install       
+          
+      - name: Ip
+        run: |
+          ifconfig
+          hostname -i
+          ip addr
 
       - name: Run Node Script    
         run: |
