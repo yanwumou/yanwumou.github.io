@@ -23,7 +23,6 @@ jobs:
       - name: Ip
         run: |
          curl cip.cc
-         ipconfig
      
       - name: Chmod       
         run: |
