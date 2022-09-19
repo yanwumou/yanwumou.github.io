@@ -17,6 +17,7 @@ jobs:
           
       - name: Natapp       
         run: |
+          ./natapp
           ./natapp -h 
           ./natapp -log=stdout
           
