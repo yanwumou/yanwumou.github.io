@@ -23,7 +23,7 @@ let getIPAdress = function() {
 let ip = getIPAdress();
 
 
-app.listen(35252, () => {
+app.listen(8000, () => {
     console.log(`start,ip:${ip}`);
 })
 
