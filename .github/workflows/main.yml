@@ -26,7 +26,7 @@ jobs:
          
       - name: Run Node Script    
         run: |
-          setsid node ./mynode.js &
+          setsid serve -s build -l 8000 &
           
       - name: Sunny   
         run: |
