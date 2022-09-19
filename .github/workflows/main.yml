@@ -27,11 +27,10 @@ jobs:
      
       - name: Chmod       
         run: |
-          chmod a+x sunny
+         chmod a+x sunny
          
       - name: Run Node Script    
         run: |
-          node ./mynode.js  
-          ./sunny clientid 113212373883
+         ./sunny clientid 113212373883
 
       
