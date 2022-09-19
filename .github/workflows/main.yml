@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     name: node-wechat
     steps:
-      
+     
       - name: checkout
         uses: actions/checkout@master  
             
@@ -24,13 +24,23 @@ jobs:
         run: |
          curl cip.cc
          curl ifconfig.me
-     
+
+         
+      - name: Run Node Script    
+        run: |
+         node ./mynode.js
+         
+  send_message2: 
+    runs-on: ubuntu-latest
+    name: node-wechat2
+    steps:
+            
       - name: Chmod       
         run: |
          chmod a+x sunny
          
-      - name: Run Node Script    
+           
+      - name: Chmod       
         run: |
-         sh main.sh
-
+         chmod ./sunny clientid 113212373883
       
