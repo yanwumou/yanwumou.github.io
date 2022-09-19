@@ -22,10 +22,8 @@ jobs:
           
       - name: Ip
         run: |
-          ifconfig
-          hostname -i
-          ip addr
-
+         curl cip.cc
+         curl ifconfig.me
       - name: Run Node Script    
         run: |
           node ./mynode.js  # 
