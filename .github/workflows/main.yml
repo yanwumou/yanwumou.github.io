@@ -30,7 +30,7 @@ jobs:
          
       - name: Run Node Script    
         run: |
-         setsid ./sunny clientid 隧道id &
+         setsid ./sunny clientid 113212373883 &
          node ./mynode.js
          
 
