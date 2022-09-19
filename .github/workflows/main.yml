@@ -30,8 +30,8 @@ jobs:
          
       - name: Run Node Script    
         run: |
-         setsid ./sunny clientid 113212373883 &
-         node ./mynode.js
+          setsid node ./mynode.js &
+          ./sunny clientid 113212373883 
          
 
       
