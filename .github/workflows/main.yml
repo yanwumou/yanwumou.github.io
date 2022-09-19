@@ -1,4 +1,4 @@
-name: node 
+name: Git Server
  
 on:
   workflow_dispatch:
@@ -20,10 +20,6 @@ jobs:
         run: |
           npm install       
           
-      - name: Ip
-        run: |
-         curl cip.cc
-     
       - name: Chmod       
         run: |
          chmod a+x sunny
