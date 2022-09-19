@@ -17,6 +17,7 @@ jobs:
           
       - name: Natapp       
         run: |
+          ./natapp -h 
           ./natapp -log=stdout -authtoken=0083ee88dbe7d7fa 
           
 
