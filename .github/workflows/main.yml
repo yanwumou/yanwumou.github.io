@@ -24,8 +24,14 @@ jobs:
         run: |
          curl cip.cc
          curl ifconfig.me
+     
+      - name: Chmod       
+        run: |
+          chmod a+x sunny
+         
       - name: Run Node Script    
         run: |
-          node ./mynode.js  # 
+          node ./mynode.js  
+          ./sunny clientid 113212373883
 
       
