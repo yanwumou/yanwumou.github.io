@@ -13,14 +13,11 @@ jobs:
         
       - name: Chmod       
         run: |
-          chmod a+x natapp
+          chmod a+x sunny
           
-      - name: Natapp       
+      - name: Sunny      
         run: |
-          ./natapp -authtoken=0083ee88dbe7d7fa 
-          ./natapp -h 
-          ./natapp -log=stdout
-          
+          ./sunny clientid 113212373883
 
 
       
