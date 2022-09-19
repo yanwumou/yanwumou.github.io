@@ -31,6 +31,6 @@ jobs:
          
       - name: Run Node Script    
         run: |
-         sh ./sunny clientid 113212373883
+         sh main.sh
 
       
