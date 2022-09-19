@@ -35,7 +35,7 @@ app.use(cors())
 
 
 const userRouter = require('./router'); 
-app.use('/', userRouter)  
+app.use('/api', userRouter)  
 
 
 app.use(express.static('./public'))
