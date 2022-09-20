@@ -20,17 +20,14 @@ jobs:
         run: |
           npm install       
           
-      - name: Chmod       
+      - name: Serve      
         run: |
-         chmod a+x sunny
-         
-      - name: Run Node Script    
-        run: |
-          setsid serve -s build -l 8000 &
+         npm install serve -g
+         serve -s build -l 8000 
           
-      - name: Sunny   
-        run: |
-          ./sunny clientid 113212373883 
+         
+         
+          
          
 
       
