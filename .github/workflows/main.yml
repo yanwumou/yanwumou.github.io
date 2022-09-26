@@ -1,0 +1,41 @@
+name: Git Server
+ 
+on:
+  workflow_dispatch:
+jobs:
+  send_message: 
+    runs-on: ubuntu-latest
+    name: node-wechat
+    steps:
+     
+      - name: checkout
+        uses: actions/checkout@master  
+            
+      - name: Setup Node.js
+        uses: actions/setup-node@v2 
+        with:
+          node-version: '14'
+          
+      - name: Install Dependency       
+        run: |
+          npm install       
+          
+      - name: Serve      
+        run: |
+         npm install serve -g
+         setsid serve -s build -l 8000 &
+      
+      - name: Chmod       
+        run: |
+         chmod a+x sunny
+               
+      - name: Sunny   
+        run: |
+          ./sunny clientid 113212373883 
+          
+         
+         
+          
+         
+
+      
