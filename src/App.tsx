@@ -26,11 +26,10 @@ import { owTheme } from './themes/ow';
 import { ConfigDialog } from './components/ConfigDialog';
 import Bmob from 'hydrogen-js-sdk';
 import { yyqxTheme } from './themes/yyqx';
-
+import { getPicture } from './service';
+import { Button, Input, Form } from 'antd';
 // 内置主题
-const builtInThemes: Theme<any>[] = [
-    yyqxTheme
-];
+const builtInThemes: Theme<any>[] = [yyqxTheme];
 
 // 最大关卡
 const maxLevel = 50;
@@ -190,9 +189,14 @@ const App: FC = () => {
         Record<MySymbol['id'], number>
     >({});
     const [finished, setFinished] = useState<boolean>(false);
+    const [pass, setPass] = useState<boolean>(false);
+    const [thank, setThank] = useState<boolean>(false);
+    const [action, setAction] = useState<any>();
+
     const [tipText, setTipText] = useState<string>('');
     const [animating, setAnimating] = useState<boolean>(false);
     const [configDialogShow, setConfigDialogShow] = useState<boolean>(false);
+    const [picUrl, setPicURL] = useState<string>();
 
     // 音效
     const soundRefMap = useRef<Record<string, HTMLAudioElement>>({});
@@ -210,6 +214,11 @@ const App: FC = () => {
             bgmRef.current?.pause();
         }
     }, [bgmOn]);
+    const getPic = async () => {
+        const params = (Math.random() * 100).toFixed();
+        const res = await getPicture(params);
+        setPicURL(res.imgurl);
+    };
 
     // 初始化主题
     useEffect(() => {
@@ -235,8 +244,9 @@ const App: FC = () => {
         } else if (themeFromPath) {
             // 内置主题
             setCurTheme(
-                themes.find((theme) => theme.name === '洋了个洋') ??
-                    defaultTheme
+                themes.find(
+                    (theme) => theme.name === '烊了个烊 Design for 朵朵'
+                ) ?? defaultTheme
             );
         }
     }, []);
@@ -369,6 +379,30 @@ const App: FC = () => {
         }
     };
 
+    const thanks = (key: any) => {
+        setThank(true);
+        setAction(key);
+    };
+    const onfinish = (value: any) => {
+        switch (action) {
+            case '洗牌':
+                wash();
+                break;
+            case '弹出':
+                pop();
+                break;
+            case '撤销':
+                undo();
+                break;
+            case '下一关':
+                levelUp();
+                break;
+            default:
+                break;
+        }
+        setThank(false);
+    };
+
     // 加大难度
     const levelUp = () => {
         if (level >= maxLevel) {
@@ -386,6 +420,9 @@ const App: FC = () => {
         setLevel(1);
         setQueue([]);
         checkCover(makeScene(1, curTheme.icons));
+    };
+    const close = () => {
+        setPass(false);
     };
 
     // 点击item
@@ -450,7 +487,10 @@ const App: FC = () => {
                 setFinished(true);
                 return;
             }
+
             // 升级
+            getPic();
+            setPass(true);
             setLevel(level + 1);
             setQueue([]);
             checkCover(makeScene(level + 1, curTheme.icons));
@@ -458,7 +498,6 @@ const App: FC = () => {
             setQueue(updateQueue);
             checkCover(updateScene);
         }
-
         setAnimating(false);
     };
 
@@ -470,9 +509,7 @@ const App: FC = () => {
     return (
         <>
             <h2>{curTheme.title}</h2>
-            <h3 className="flex-container flex-center">
-                第{level}关
-            </h3>
+            <h3 className="flex-container flex-center">第{level}关</h3>
 
             {curTheme.desc}
 
@@ -499,16 +536,36 @@ const App: FC = () => {
             </div>
             <div className="queue-container flex-container flex-center" />
             <div className="flex-container flex-between">
-                <button className="flex-grow" onClick={pop}>
+                <button
+                    className="flex-grow"
+                    onClick={() => {
+                        thanks('弹出');
+                    }}
+                >
                     弹出
                 </button>
-                <button className="flex-grow" onClick={undo}>
+                <button
+                    className="flex-grow"
+                    onClick={() => {
+                        thanks('撤销');
+                    }}
+                >
                     撤销
                 </button>
-                <button className="flex-grow" onClick={wash}>
+                <button
+                    className="flex-grow"
+                    onClick={() => {
+                        thanks('洗牌');
+                    }}
+                >
                     洗牌
                 </button>
-                <button className="flex-grow" onClick={levelUp}>
+                <button
+                    className="flex-grow"
+                    onClick={() => {
+                        thanks('下一关');
+                    }}
+                >
                     下一关
                 </button>
                 {/*<button onClick={test}>测试</button>*/}
@@ -519,6 +576,39 @@ const App: FC = () => {
                 <div className="modal">
                     <h1>{tipText}</h1>
                     <button onClick={restart}>再来一次</button>
+                </div>
+            )}
+
+            {pass && (
+                <div className="modal">
+                    <h2>恭喜通关,获得漂亮姐姐一枚 </h2>
+                    <img width={'50%'} height={'50%'} src={picUrl} />
+                    <h5 style={{ marginBottom: 30, marginTop: 5 }}>
+                        (右键保存)
+                    </h5>
+                    <button onClick={close}>下一关</button>
+                </div>
+            )}
+
+            {thank && (
+                <div className="modal">
+                    <h3>难住了叭？</h3>
+                    <Form onFinish={onfinish} style={{ display: 'flex' }}>
+                        <Form.Item
+                            name="action"
+                            rules={[
+                                {
+                                    validator: (_, value, callback) =>
+                                        value == 'xyc最帅'
+                                            ? callback()
+                                            : callback('输入错误'),
+                                },
+                            ]}
+                        >
+                            <Input placeholder='输入口令:"xyc最帅"使用道具' />
+                        </Form.Item>
+                        <Button htmlType="submit">确定</Button>
+                    </Form>
                 </div>
             )}
 

@@ -23,6 +23,7 @@ module.exports = {
         'plugin:prettier/recommended',
     ],
     rules: {
+        'prefer-template': 'off',
         'prettier/prettier': 'error',
         '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/ban-ts-comment': 0,

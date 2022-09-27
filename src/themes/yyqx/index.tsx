@@ -16,8 +16,8 @@ const fishes = Object.entries(imagesUrls).map(([key, value]) => ({
 }));
 
 export const yyqxTheme: Theme<DefaultSoundNames> = {
-    title: '洋了个洋',
-    name: '洋了个洋',
+    title: '烊了个烊 Design for 朵朵',
+    name: '烊了个烊 Design for 朵朵',
     icons: fishes.map(({ name, content }) => ({
         name,
         content,
